@@ -4,11 +4,13 @@ using namespace Rcpp;
 
 // [[Rcpp::export]]
 
-NumericVector insertion_order_cpp(NumericVector arr) {
-  int length = arr.size();
+NumericVector insertion_order_cpp(NumericVector input) {
+  int length = input.size();
   NumericVector index(length);
+  NumericVector arr(length);
   for (int i = 0; i < length; i++) {
     index[i] = i + 1; //+1 becoz index start from 1
+    arr[i] = input[i];
   }
   
   int i, j;
