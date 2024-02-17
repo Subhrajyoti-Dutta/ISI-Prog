@@ -1,10 +1,10 @@
 library(r2r)
-check = function(n, func) {
-  
+
+testUnif = function(n, func){
   freq = hashmap(
     on_missing_key = "default",
     default = 0
-    )
+  )
   
   redo = 10000
   for (i in 1:(redo * factorial(n))){
@@ -16,8 +16,13 @@ check = function(n, func) {
   
   if (length(freq_vals) != factorial(n)) return(FALSE)
   
-  if (chisq.test(freq_vals)$p.value > 0.05) return(TRUE)
-  else return(FALSE)
+  return(chisq.test(freq_vals)$p.value)
 }
 
-check(3, sample)
+check = function(arrSize, test, funct) {
+  p_val = test(arrSize, funct)
+  
+  return(ifelse(p_val > 0.05, TRUE, FALSE))
+}
+
+check(3, testUnif, sample)
